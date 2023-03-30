@@ -8,8 +8,9 @@ export const setCurrentUser = (user) => ({
 	user
 })
 
-export const removeCurrentUser = () => ({
+export const removeCurrentUser = (userId) => ({
 	type: REMOVE_CURRENT_USER, 
+	userId
 })
 
 export const login = (user) => async (dispatch) => {
@@ -24,22 +25,47 @@ export const login = (user) => async (dispatch) => {
 
 	if (response.ok) {
 	const data = await response.json();
+		storeCurrentUser(data.user);
 		dispatch(setCurrentUser(data.user));
 	}
 	return response; 
 }
 
-export const logout = (userId) => async (dispatch) => {
+export const logout = () => async (dispatch) => {
 	const response = await csrfFetch(`/api/session/`, {
 		method: "DELETE"
 	})
 
 	if (response.ok) {
+		storeCurrentUser(null);
 		dispatch(removeCurrentUser())
 	}
 }
 
-const initialState = {user: null}
+export function storeCSRFToken(response) {
+	const csrfToken = response.headers.get("X-CSRF-Token");
+	if (csrfToken) sessionStorage.setItem("X-CSRF-Token", csrfToken)
+}
+
+export const restoreSession = () => async (dispatch) => {
+	const response = await csrfFetch('/api/session')
+	storeCSRFToken(response);
+	const data = await response.json();
+	storeCurrentUser(data.user);
+	dispatch(setCurrentUser(data.user));
+	return response; 
+}
+
+const storeCurrentUser = (user) => {
+	const currentUser = JSON.stringify(user);
+	if (user) {
+		sessionStorage.setItem("currentUser", currentUser)
+	} else {
+		sessionStorage.removeItem("currentUser");
+	}
+}
+
+const initialState = {user: JSON.parse(sessionStorage.getItem("currentUser"))}
 
 const sessionReducer = (state = initialState, action) => {
 	switch (action.type) {

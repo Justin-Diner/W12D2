@@ -2,12 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/session";
 import './LoginForm.css'
+import { Redirect } from 'react-router-dom';
 
 const LoginFormPage = () => {
 	const dispatch = useDispatch(); 
 	const [credential, setCredential] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+	const sessionUser = useSelector(state => state.session.user);
+
+	if (sessionUser) {
+		return <Redirect to="/" />
+	} 
 
 	function handleClick(e) {
 		e.preventDefault(); 
@@ -48,7 +54,7 @@ const LoginFormPage = () => {
 			<button id="login_button" onClick={handleClick}>Log In</button>
 			<ul className="errors">
 				{errors.map(error => {
-					const errorText = error.slice(12, error.length - 3)
+					const errorText = error.slice(12, error.length - 2)
 					return <li key={error}>{errorText}</li>})
 				}
 			</ul>
