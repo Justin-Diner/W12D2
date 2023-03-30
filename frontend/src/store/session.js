@@ -14,6 +14,7 @@ export const removeCurrentUser = (userId) => ({
 })
 
 export const login = (user) => async (dispatch) => {
+
 	const {credential, password } = user; 
 	const response = await csrfFetch('/api/session', {
 		method: 'POST',
@@ -40,6 +41,21 @@ export const logout = () => async (dispatch) => {
 		storeCurrentUser(null);
 		dispatch(removeCurrentUser())
 	}
+}
+
+export const signup = (user) => async (dispatch) => {
+
+	const response = await csrfFetch('/api/users', {
+		method: "POST", 
+		body: JSON.stringify(user)
+	});
+
+	if (response.ok) {
+		const data = await response.json(); 
+		storeCurrentUser(data.user);
+		dispatch(setCurrentUser(data.user));
+	}
+	return response;
 }
 
 export function storeCSRFToken(response) {

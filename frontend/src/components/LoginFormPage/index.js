@@ -29,7 +29,7 @@ const LoginFormPage = () => {
 			.catch(async (res) => {
 				let data; 
 				try {
-					data = await res.clonse().json;
+					data = await res.clone().json;
 				} catch {
 					data = await res.text(); 
 				}
