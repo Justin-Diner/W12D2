@@ -9,11 +9,13 @@
 	padding-bottom: 20px;
 	display: block;
 	border-radius: 4%; 
+	background-color: lightyellow;
 }
 
 #login_button {
 	background-color: #e61e4d;
 	border-radius: 30%; 
+	font-weight: bold;
 }
 
 #login_button:hover {

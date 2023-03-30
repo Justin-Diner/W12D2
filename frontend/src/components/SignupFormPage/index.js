@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { signup } from '../../store/session';
 import { Redirect } from 'react-router-dom';
+import './SignupForm.css'
+
 
 const SignUpForm = () => {
 	const dispatch = useDispatch(); 
@@ -10,9 +12,9 @@ const SignUpForm = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
-	const user = useSelector(state => state.session.user)
+	const sessionUser = useSelector(state => state.session.user)
 
-	if (user) {
+	if (sessionUser) {
 		return <Redirect to="/" />
 	}
 
@@ -47,26 +49,26 @@ const SignUpForm = () => {
 	}
 
 	return (
-		<form>
-			<h1>Create an Account</h1>
+		<form id="signup_form" > 
+			<h1 className="signup_option">Create an Account</h1>
 
-			<label> Username <br/>
-			<input type="text" onChange={(e)=> setUsername(e.target.value)} />
+			<label className="signup_option"> Username
+			<input  type="text" onChange={(e)=> setUsername(e.target.value)} />
 			</label>
 
-			<label> Email
-			<input type="text" onChange={(e)=> setEmail(e.target.value)}/>
+			<label className="signup_option"> Email
+			<input  type="text" onChange={(e)=> setEmail(e.target.value)}/>
 			</label>
 
-			<label> Password
-			<input type="password" onChange={(e)=> setPassword(e.target.value)}/>
+			<label className="signup_option"> Password
+			<input  type="password" onChange={(e)=> setPassword(e.target.value)}/>
 			</label>
 
-			<label> Confirm Password
-			<input type="password" onChange={(e)=> setConfirmPassword(e.target.value)}/>
+			<label className="signup_option"> Confirm Password
+			<input  type="password" onChange={(e)=> setConfirmPassword(e.target.value)}/>
 			</label>
 
-			<button onClick={handleClick}>Sign Up</button>
+			<button id="signup_button" className="signup_option" onClick={handleClick}>Sign Up</button>
 
 			<ul className="errors">
 				{errors.map(error => {

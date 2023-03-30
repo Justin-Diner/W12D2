@@ -1,0 +1,39 @@
+#signup_form {
+	position: absolute;
+	display: flex;
+	align-items: end;
+	justify-content: center;
+	flex-direction: column;
+
+	border: 1px solid black;
+	border-radius: 4%; 
+	width: 410px;
+	background-color: lightblue;
+}
+
+.signup_option {
+	position: relative;
+	right: 80px;
+	padding: 3px;
+}
+
+#signup_button {
+	position: relative;
+	right: 83px;
+	margin-top: 5px; 
+	font-weight: bold;
+}
+
+#signup_label {
+	position: relative;
+	right: 200px;
+}
+
+input {
+	margin-left: 6px;
+}
+
+.errors {
+	position: relative; 
+	right: 40px;
+}
