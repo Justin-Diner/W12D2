@@ -27,13 +27,15 @@ const SignUpForm = () => {
 		return dispatch(signup(newUser))
 			.catch(async (res) => {
 				let data; 
+				
 				try {
-					data = await res.clone().json;
+					data = await res.clone().json();
 				} catch {
 					data = await res.text();
 				}
-				if (data?.errors) setErrors(data.errors);
-				else if (data) setErrors([data]);
+				const allErrors = data.map(error => error)
+				if (data?.errors) setErrors(allErrors);
+				else if (data) setErrors(allErrors);
 				else setErrors([res.statusText])
 			});
 	}
@@ -62,12 +64,10 @@ const SignUpForm = () => {
 
 			<ul className="errors">
 				{errors.map(error => {
-					console.log(error)
 					if (error.includes("do not match!")) {
 						return <li>{error}</li>
 					} else {
-						const errorText = error.slice(12, error.length - 2)
-						return <li key={error}>{errorText}</li>
+						return <li key={error}>{error}</li>
 					}
 				})}
 			</ul>

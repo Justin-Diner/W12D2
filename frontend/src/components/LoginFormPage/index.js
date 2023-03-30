@@ -29,7 +29,7 @@ const LoginFormPage = () => {
 			.catch(async (res) => {
 				let data; 
 				try {
-					data = await res.clone().json;
+					data = await res.clone().json();
 				} catch {
 					data = await res.text(); 
 				}
@@ -54,7 +54,7 @@ const LoginFormPage = () => {
 			<button id="login_button" onClick={handleClick}>Log In</button>
 			<ul className="errors">
 				{errors.map(error => {
-					const errorText = error.slice(12, error.length - 2)
+					const errorText = error.slice(12)
 					return <li key={error}>{errorText}</li>})
 				}
 			</ul>

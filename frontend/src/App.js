@@ -6,10 +6,10 @@ import SignUpForm from './components/SignupFormPage';
 function App() {
   return (
     <Switch>
-			<Route path="/"> 
+			<Route exact path="/" > 
 				<SignUpForm/>
 			</Route>
-			<Route path="/login">
+			<Route  path="/login" >
 				<LoginFormPage />
 			</Route>
 		</Switch>
