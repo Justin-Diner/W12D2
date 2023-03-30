@@ -9,7 +9,8 @@
 	padding-bottom: 20px;
 	display: block;
 	border-radius: 4%; 
-	background: radial-gradient(ellipse at top, #ffa201, transparent), radial-gradient(ellipse at bottom, #69df08, transparent);
+	background: radial-gradient(ellipse at top, #ffa201, transparent), radial-gradient(ellipse at bottom, #1303ee, transparent);
+	box-shadow: 0 0 5px black;
 }
 
 #login_button {
