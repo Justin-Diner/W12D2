@@ -1,30 +1,31 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../store/session";
+import './LoginForm.css'
 
 const LoginFormPage = () => {
-	const dispatch = useDispatch();
-	const sessionUser = useSelector(state => state.session.user);
+	const dispatch = useDispatch(); 
 	const [credential, setCredential] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 
-	const handleSubmit = (e) => {
+	function handleClick(e) {
 		e.preventDefault(); 
-		setErrors([]);
 
 		const user = {
-			credential: credential,
+			credential: credential, 
 			password: password
 		}
+
+		setErrors([]);
 
 		return dispatch(login(user))
 			.catch(async (res) => {
 				let data; 
 				try {
-					data = await res.clone().json();
+					data = await res.clonse().json;
 				} catch {
-					data = await res.text();
+					data = await res.text(); 
 				}
 				if (data?.errors) setErrors(data.errors);
 				else if (data) setErrors([data]);
@@ -33,18 +34,24 @@ const LoginFormPage = () => {
 	}
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<ul> 
-				{errors.map(error => <li key={error}>{error}</li>)}
+		<form id="login_form">
+			<h1>Please Log In</h1> 
+			<label> 
+				<input id="login_credential" placeholder="Username or Email" type="text" onChange={(e) => setCredential(e.target.value)} />
+			</label>
+			<br/>
+			<label>  <br/>
+				<input id="login_password" placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)}/>
+			</label>
+			<br/>
+			<br/>
+			<button id="login_button" onClick={handleClick}>Log In</button>
+			<ul className="errors">
+				{errors.map(error => {
+					const errorText = error.slice(12, error.length - 3)
+					return <li key={error}>{errorText}</li>})
+				}
 			</ul>
-			<label> Username or Email
-				<input type="text" value={credential}  onChange={(e) => setCredential(e.currentTarget.value)} required/>
-			</label>
-
-			<label> Password
-				<input type="password" value={password} onChange={(e) => setPassword(e.currentTarget.value)}/>
-			</label>
-			<input type="submit" value="Submit" />
 		</form>
 	)
 }

@@ -1,0 +1,21 @@
+.errors {
+	color: red;
+}
+
+#login_form {
+	border: 1px solid black; 
+	padding: 24px;
+	width: 300px;
+	padding-bottom: 20px;
+	display: block;
+	border-radius: 4%; 
+}
+
+#login_button {
+	background-color: #e61e4d;
+	border-radius: 30%; 
+}
+
+#login_button:hover {
+	cursor: pointer;
+}

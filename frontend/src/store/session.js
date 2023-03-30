@@ -8,7 +8,6 @@ export const setCurrentUser = (user) => ({
 	user
 })
 
-
 export const removeCurrentUser = () => ({
 	type: REMOVE_CURRENT_USER, 
 })
