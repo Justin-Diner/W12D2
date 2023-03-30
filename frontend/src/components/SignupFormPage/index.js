@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { signup } from '../../store/session';
+import { Redirect } from 'react-router-dom';
 
 const SignUpForm = () => {
 	const dispatch = useDispatch(); 
@@ -9,6 +10,11 @@ const SignUpForm = () => {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [errors, setErrors] = useState([]);
+	const user = useSelector(state => state.session.user)
+
+	if (user) {
+		return <Redirect to="/" />
+	}
 
 	const handleClick = (e) => {
 		e.preventDefault(); 
