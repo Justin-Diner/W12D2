@@ -9,7 +9,7 @@
 	padding-bottom: 20px;
 	display: block;
 	border-radius: 4%; 
-	background-color: lightyellow;
+	background: radial-gradient(ellipse at top, #ffa201, transparent), radial-gradient(ellipse at bottom, #69df08, transparent);
 }
 
 #login_button {

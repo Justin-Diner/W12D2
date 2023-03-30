@@ -70,12 +70,12 @@ const SignUpForm = () => {
 
 			<button id="signup_button" className="signup_option" onClick={handleClick}>Sign Up</button>
 
-			<ul className="errors">
+			<ul >
 				{errors.map(error => {
 					if (error.includes("do not match!")) {
-						return <li>{error}</li>
+						return <li className="errors">{error}</li>
 					} else {
-						return <li key={error}>{error}</li>
+						return <li className="errors" key={error}>{error}</li>
 					}
 				})}
 			</ul>

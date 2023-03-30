@@ -8,7 +8,9 @@
 	border: 1px solid black;
 	border-radius: 4%; 
 	width: 410px;
-	background-color: lightblue;
+	background: radial-gradient(#e66465, #9198e5);
+	box-shadow: 0 0 5px black;
+	
 }
 
 .signup_option {
